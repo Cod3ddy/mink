@@ -1,2 +1,2 @@
-# url-shortner
-shorten urls
+# Mink
+mink is a URL-Shortener written in golang
