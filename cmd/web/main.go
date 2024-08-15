@@ -19,7 +19,7 @@ type application struct {
 }
 
 func main() {
-	address := flag.String("address", ":5000", "HTTP network address")
+	address := flag.String("address", ":3000", "HTTP network address")
 
 	flag.Parse()
 
@@ -52,7 +52,8 @@ func main() {
 		WriteTimeout: 10 * time.Second,
 	}
 
-	err = server.ListenAndServeTLS("./tls/cert/pem", "./tls/key.pem")
+	logger.Info("starting server on %s", "addr", server.Addr)
+	err = server.ListenAndServeTLS("./tls/cert.pem", "./tls/key.pem")
 
 	logger.Error(err.Error())
 	os.Exit(1)
