@@ -1,8 +1,17 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/cod3ddy/mink/ui"
+)
 
 func (app *application) routes() http.Handler {
-	
-	return nil
+	mux := http.NewServeMux()
+
+	mux.Handle("GET /static/", http.FileServerFS(ui.Files))
+	mux.HandleFunc("GET /ping", ping)
+
+	mux.HandleFunc("GET /{$}", app.home)
+	return mux
 }
