@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/cod3ddy/mink/internal/validator"
@@ -35,7 +36,13 @@ func (app *application) shortenUrl(w http.ResponseWriter, r *http.Request){
 		return
 	}
 
-	w.Write([]byte("shortening url....."))
+	resp, err := shorten(form.URL)
+	if err != nil{
+		app.serverError(w, r, err)
+	}
+
+	wr := fmt.Sprintf("response: %v", resp)
+	w.Write([]byte(wr))
 }
 
 func ping(w http.ResponseWriter, r *http.Request) {
