@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/cod3ddy/mink/ui"
+	"github.com/justinas/alice"
 )
 
 func (app *application) routes() http.Handler {
@@ -14,5 +15,7 @@ func (app *application) routes() http.Handler {
 
 	mux.HandleFunc("GET /{$}", app.home)
 	mux.HandleFunc("POST /url/shorten", app.shortenUrl)
-	return mux
+
+	standard := alice.New(app.logRequest, app.recoverPanic, commonHeaders)
+	return standard.Then(mux)
 }
