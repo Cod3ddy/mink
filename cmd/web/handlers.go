@@ -41,7 +41,7 @@ func (app *application) shortenUrl(w http.ResponseWriter, r *http.Request){
 		app.serverError(w, r, err)
 	}
 
-	wr := fmt.Sprintf("response: %v", resp)
+	wr := fmt.Sprintf("response: %v [%v]", resp, generateShortKey())
 	w.Write([]byte(wr))
 }
 
