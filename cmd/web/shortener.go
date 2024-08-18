@@ -6,13 +6,13 @@ import (
 	"time"
 )
 
-func shorten(url string) (string, error){
+func shorten(url string) (int, error){
 	code, err := pingURL(url)
 	if err != nil{
-		return "", err
+		return 0, err
 	}
 
-	return http.StatusText(code), nil
+	return code, nil
 }
 
 func generateShortKey() string {
@@ -29,6 +29,7 @@ func generateShortKey() string {
 	return string (shortKey)
 }
 
+// Check if url exist on the net
 func pingURL(url string)(int, error){
 	req, err := http.NewRequest("HEAD", url, nil)
 	if err != nil{
