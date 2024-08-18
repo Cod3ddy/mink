@@ -29,6 +29,7 @@ func generateShortKey() string {
 	return string (shortKey)
 }
 
+// Check if url exist on the net
 func pingURL(url string)(int, error){
 	req, err := http.NewRequest("HEAD", url, nil)
 	if err != nil{
