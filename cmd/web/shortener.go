@@ -6,13 +6,13 @@ import (
 	"time"
 )
 
-func shorten(url string) (string, error){
+func shorten(url string) (int, error){
 	code, err := pingURL(url)
 	if err != nil{
-		return "", err
+		return 0, err
 	}
 
-	return http.StatusText(code), nil
+	return code, nil
 }
 
 func generateShortKey() string {
