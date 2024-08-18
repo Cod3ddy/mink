@@ -41,7 +41,6 @@ func (app *application) shortenUrl(w http.ResponseWriter, r *http.Request){
 		app.serverError(w, r, err)
 	}
 
-	fmt.Printf("resp: %v", http.StatusText(resp))
 
 	if http.StatusText(resp) == "Not Found"{
 		data := app.newTemplateData(r)
@@ -49,6 +48,7 @@ func (app *application) shortenUrl(w http.ResponseWriter, r *http.Request){
 	}
 
 	w.Write([]byte(http.StatusText(resp)))
+
 }
 
 func ping(w http.ResponseWriter, r *http.Request) {
