@@ -1,10 +1,18 @@
 {{define "title"}}Mink - Home{{end}} 
+
+{{define "header"}} Mink{{end}}
+
 {{define "main"}}
-
-<!-- form to be shown here -->
-<form action="/url/shorten" method="POST" novalidate>
-    <input type="text" name="url">
-    <input type="submit" value="Go">
-</form>
-
+<div class="container">
+    <h1>Mink</h1>
+    <form action="/url/shorten" method="post">
+      <input
+        type="text"
+        placeholder="https://youtube.com/@dreamsofcode"
+        name="url"
+        required
+      />
+      <button type="submit">Shorten</button>
+    </form>
+  </div>
 {{end}}
