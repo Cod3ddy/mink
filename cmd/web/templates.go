@@ -11,6 +11,7 @@ import (
 
 type templateData struct{
 	Form any
+	Status string
 }
 
 func newTemplateChache() (map[string]*template.Template, error){
