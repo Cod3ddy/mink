@@ -36,19 +36,20 @@ func (app *application) shortenUrl(w http.ResponseWriter, r *http.Request){
 		return
 	}
 
-	resp, err := shorten(form.URL)
+	code, err := shorten(form.URL)
 	if err != nil{
 		app.serverError(w, r, err)
 	}
 
-	fmt.Printf("resp: %v", http.StatusText(resp))
+	fmt.Printf("resp: %v", http.StatusText(code))
 
-	if http.StatusText(resp) == "Not Found"{
+	if http.StatusText(code) == "Not Found"{
 		data := app.newTemplateData(r)
-		app.render(w,r, resp, "404.html", data)
+		data.Status = http.StatusText(code)
+		app.render(w,r, code, "404.html", data)
 	}
 
-	w.Write([]byte(http.StatusText(resp)))
+	w.Write([]byte(http.StatusText(code)))
 }
 
 func ping(w http.ResponseWriter, r *http.Request) {
