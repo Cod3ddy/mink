@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/cod3ddy/mink/internal/validator"
@@ -41,15 +40,12 @@ func (app *application) shortenUrl(w http.ResponseWriter, r *http.Request){
 		app.serverError(w, r, err)
 	}
 
-	fmt.Printf("resp: %v", http.StatusText(code))
 
 	if http.StatusText(code) == "Not Found"{
 		data := app.newTemplateData(r)
 		data.Status = http.StatusText(code)
 		app.render(w,r, code, "404.html", data)
 	}
-
-	w.Write([]byte(http.StatusText(code)))
 }
 
 func ping(w http.ResponseWriter, r *http.Request) {
